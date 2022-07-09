@@ -22,10 +22,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                (
-                    "slug",
-                    autoslug.fields.AutoSlugField(editable=False, populate_from="name"),
-                ),
+                ("slug", models.SlugField()),
             ],
             options={
                 "verbose_name": "Category",

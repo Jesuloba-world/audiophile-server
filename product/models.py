@@ -42,11 +42,18 @@ class Product(models.Model):
         help_text=_("Required and unique"),
         unique=True,
     )
-    short_name = models.CharField(max_length=15, blank=True, null=True)
+    short_name = models.CharField(max_length=15, blank=True, null=True, unique=True)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=True, blank=True
     )
-    slug = models.SlugField(null=True, unique=True, editable=False)
+    slug = models.SlugField(null=True, unique=True, blank=True, editable=False)
+    new = models.BooleanField(default=False)
+    price = models.DecimalField(null=True, blank=True, decimal_places=2, max_digits=8)
+    description = models.TextField(
+        null=True,
+        blank=True,
+    )
+    features = models.TextField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(f"{self.short_name} {self.category.name}")
