@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "2555c08f746bc17dbf25d17acfa2cb0668f1dfc0d43a905eb36e700301b3af8e"
+            "sha256": "d66a52e13b858c3113b5d835bf70aaa9107004e8a8fd3fc700499e4031158c02"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,6 +39,22 @@
             "index": "pypi",
             "version": "==3.2"
         },
+        "django-cors-headers": {
+            "hashes": [
+                "sha256:37e42883b5f1f2295df6b4bba96eb2417a14a03270cb24b2a07f021cd4487cf4",
+                "sha256:f9dc6b4e3f611c3199700b3e5f3398c28757dcd559c2f82932687f3d0443cfdf"
+            ],
+            "index": "pypi",
+            "version": "==3.13.0"
+        },
+        "django-dotenv": {
+            "hashes": [
+                "sha256:3812bb0f4876cf31f902aad140f0645e120e51ee30eb7c40c22050f58a0e4adb",
+                "sha256:a9b1b40a70bd321acd231926acedb9bd2c5e873e33a1873b34a7276d196a765e"
+            ],
+            "index": "pypi",
+            "version": "==1.4.2"
+        },
         "django-filter": {
             "hashes": [
                 "sha256:ed429e34760127e3520a67f415bec4c905d4649fbe45d0d6da37e6ff5e0287eb",
@@ -49,11 +65,11 @@
         },
         "django-graphql-auth": {
             "hashes": [
-                "sha256:1e4e326ad2f71935e5bb9c40e3698bc57d3ba1ebdcd4d4a91e2b7ff4d65996a9",
-                "sha256:f60a8d1c1497d97f74193ab5b8475b6c2432840bb383e641dd1a78ff909490ee"
+                "sha256:88c8df2a65e1ac846ea9be65960353d853d34dfac8dee4222fdce008daa2080a",
+                "sha256:a4e1699053179c0567a060ed592cdd0883bf335a36a8968b97d910f6dde368d5"
             ],
             "index": "pypi",
-            "version": "==0.3.16"
+            "version": "==0.3.15"
         },
         "django-graphql-jwt": {
             "hashes": [
@@ -102,11 +118,11 @@
         },
         "pyjwt": {
             "hashes": [
-                "sha256:5c6eca3c2940464d106b99ba83b00c6add741c9becaec087fb7ccdefea71350e",
-                "sha256:8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"
+                "sha256:72d1d253f32dbd4f5c88eaf1fdc62f3a19f676ccbadb9dbc5d07e951b2b26daf",
+                "sha256:d42908208c699b3b973cbeb01a969ba6a96c821eefb1c5bfe4c390c01d67abba"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==1.7.1"
+            "version": "==2.4.0"
         },
         "pytz": {
             "hashes": [

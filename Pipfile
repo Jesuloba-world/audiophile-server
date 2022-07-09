@@ -8,6 +8,8 @@ django = "==3.2"
 graphene-django = "*"
 django-graphql-jwt = "*"
 django-graphql-auth = "*"
+django-cors-headers = "*"
+django-dotenv = "*"
 
 [dev-packages]
 black = "*"
