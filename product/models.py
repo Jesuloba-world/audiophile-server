@@ -1,3 +1,4 @@
+from itertools import product
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import slugify
@@ -73,7 +74,7 @@ class Product(models.Model):
         blank=True,
         related_name="products",
     )
-    image = models.ForeignKey(
+    image = models.OneToOneField(
         Image, on_delete=models.SET_NULL, related_name="images", null=True, blank=True
     )
     slug = models.SlugField(null=True, unique=True, blank=True, editable=False)
@@ -114,3 +115,28 @@ class Included(models.Model):
 
     def __str__(self):
         return f"{self.quantity}x {self.item}"
+
+
+class Gallery(models.Model):
+    id = models.UUIDField(
+        default=uuid.uuid4, unique=True, primary_key=True, editable=False
+    )
+    product = models.OneToOneField(
+        Product, on_delete=models.CASCADE, blank=False, null=False
+    )
+    first = models.OneToOneField(
+        Image, on_delete=models.SET_NULL, null=True, blank=True, related_name="first"
+    )
+    second = models.OneToOneField(
+        Image, on_delete=models.SET_NULL, null=True, blank=True, related_name="second"
+    )
+    third = models.OneToOneField(
+        Image, on_delete=models.SET_NULL, null=True, blank=True, related_name="third"
+    )
+
+    class Meta:
+        verbose_name = _("Gallery")
+        verbose_name_plural = _("Galleries")
+
+    def __str__(self):
+        return f"{self.product.short_name} gallery"
