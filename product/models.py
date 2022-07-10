@@ -4,6 +4,29 @@ from django.template.defaultfilters import slugify
 import uuid
 
 
+def user_directory_path(instance, filename):
+    return f"product/{instance.alt_text}/{filename}"
+
+
+class Image(models.Model):
+    id = models.UUIDField(
+        default=uuid.uuid4, unique=True, primary_key=True, editable=False
+    )
+    alt_text = models.CharField(max_length=100, null=True, blank=True)
+    desktop = models.ImageField(
+        upload_to=user_directory_path, verbose_name="Desktop Image"
+    )
+    tablet = models.ImageField(
+        upload_to=user_directory_path, verbose_name="Tablet Image"
+    )
+    mobile = models.ImageField(
+        upload_to=user_directory_path, verbose_name="Mobile Image"
+    )
+
+    def __str__(self):
+        return self.alt_text
+
+
 class Category(models.Model):
     id = models.UUIDField(
         default=uuid.uuid4, unique=True, primary_key=True, editable=False
@@ -50,6 +73,9 @@ class Product(models.Model):
         blank=True,
         related_name="products",
     )
+    image = models.ForeignKey(
+        Image, on_delete=models.SET_NULL, related_name="images", null=True, blank=True
+    )
     slug = models.SlugField(null=True, unique=True, blank=True, editable=False)
     new = models.BooleanField(default=False)
     price = models.DecimalField(null=True, blank=True, decimal_places=2, max_digits=8)
@@ -58,7 +84,7 @@ class Product(models.Model):
         blank=True,
     )
     features = models.TextField(null=True, blank=True)
-    others = models.ManyToManyField(Product, related_name="recommended")
+    # others = models.ManyToManyField(Product, related_name="recommended")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(f"{self.short_name} {self.category.name}")
