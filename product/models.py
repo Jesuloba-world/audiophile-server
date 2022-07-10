@@ -1,8 +1,8 @@
-from itertools import product
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import slugify
 import uuid
+from django.db.models.signals import post_save, post_delete
 
 
 def user_directory_path(instance, filename):
@@ -28,6 +28,25 @@ class Image(models.Model):
         return self.alt_text
 
 
+class MiniProduct(models.Model):
+    id = models.UUIDField(
+        default=uuid.uuid4, unique=True, primary_key=True, editable=False
+    )
+    name = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        unique=True,
+    )
+    slug = models.SlugField(null=True, unique=True, editable=True)
+    image = models.OneToOneField(
+        Image, on_delete=models.SET_NULL, related_name="mini_images", null=True, blank=True
+    )
+
+    def __str__(self):
+        return f"{self.name} mini"
+
+
 class Category(models.Model):
     id = models.UUIDField(
         default=uuid.uuid4, unique=True, primary_key=True, editable=False
@@ -40,7 +59,7 @@ class Category(models.Model):
         help_text=_("Required and unique"),
         unique=True,
     )
-    slug = models.SlugField(null=True, unique=True, editable=False)
+    slug = models.SlugField(null=True, unique=True, editable=True)
 
     class Meta:
         verbose_name = _("Category")
@@ -77,7 +96,7 @@ class Product(models.Model):
     image = models.OneToOneField(
         Image, on_delete=models.SET_NULL, related_name="images", null=True, blank=True
     )
-    slug = models.SlugField(null=True, unique=True, blank=True, editable=False)
+    slug = models.SlugField(null=True, unique=True, blank=True, editable=True)
     new = models.BooleanField(default=False)
     price = models.DecimalField(null=True, blank=True, decimal_places=2, max_digits=8)
     description = models.TextField(
@@ -85,7 +104,11 @@ class Product(models.Model):
         blank=True,
     )
     features = models.TextField(null=True, blank=True)
-    # others = models.ManyToManyField(Product, related_name="recommended")
+    others = models.ManyToManyField(
+        MiniProduct,
+        related_name="others",
+        blank=True,
+    )
 
     def save(self, *args, **kwargs):
         self.slug = slugify(f"{self.short_name} {self.category.name}")
