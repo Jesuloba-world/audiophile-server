@@ -2,30 +2,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import slugify
 import uuid
-from django.db.models.signals import post_save, post_delete
-
-
-def user_directory_path(instance, filename):
-    return f"product/{instance.alt_text}/{filename}"
-
-
-class Image(models.Model):
-    id = models.UUIDField(
-        default=uuid.uuid4, unique=True, primary_key=True, editable=False
-    )
-    alt_text = models.CharField(max_length=100, null=True, blank=True)
-    desktop = models.ImageField(
-        upload_to=user_directory_path, verbose_name="Desktop Image"
-    )
-    tablet = models.ImageField(
-        upload_to=user_directory_path, verbose_name="Tablet Image"
-    )
-    mobile = models.ImageField(
-        upload_to=user_directory_path, verbose_name="Mobile Image"
-    )
-
-    def __str__(self):
-        return self.alt_text
+from images.models import ProductImage
+from images.models import product_directory_path
 
 
 class MiniProduct(models.Model):
@@ -40,7 +18,7 @@ class MiniProduct(models.Model):
     )
     slug = models.SlugField(null=True, unique=True, editable=True)
     image = models.OneToOneField(
-        Image, on_delete=models.SET_NULL, related_name="mini_images", null=True, blank=True
+        ProductImage, on_delete=models.SET_NULL, related_name="mini_images", null=True, blank=True
     )
 
     def __str__(self):
@@ -94,7 +72,7 @@ class Product(models.Model):
         related_name="products",
     )
     image = models.OneToOneField(
-        Image, on_delete=models.SET_NULL, related_name="images", null=True, blank=True
+        ProductImage, on_delete=models.SET_NULL, related_name="images", null=True, blank=True
     )
     slug = models.SlugField(null=True, unique=True, blank=True, editable=True)
     new = models.BooleanField(default=False)
@@ -148,13 +126,13 @@ class Gallery(models.Model):
         Product, on_delete=models.CASCADE, blank=False, null=False
     )
     first = models.OneToOneField(
-        Image, on_delete=models.SET_NULL, null=True, blank=True, related_name="first"
+        ProductImage, on_delete=models.SET_NULL, null=True, blank=True, related_name="first"
     )
     second = models.OneToOneField(
-        Image, on_delete=models.SET_NULL, null=True, blank=True, related_name="second"
+        ProductImage, on_delete=models.SET_NULL, null=True, blank=True, related_name="second"
     )
     third = models.OneToOneField(
-        Image, on_delete=models.SET_NULL, null=True, blank=True, related_name="third"
+        ProductImage, on_delete=models.SET_NULL, null=True, blank=True, related_name="third"
     )
 
     class Meta:

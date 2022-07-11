@@ -3,10 +3,10 @@
 from django.db import migrations, models
 import django.db.models.deletion
 import product.models
+from images.models import product_directory_path
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('product', '0013_included'),
     ]
@@ -17,14 +17,20 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('alt_text', models.CharField(blank=True, max_length=100, null=True)),
-                ('desktop', models.ImageField(upload_to=product.models.user_directory_path, verbose_name='Desktop Image')),
-                ('tablet', models.ImageField(upload_to=product.models.user_directory_path, verbose_name='Tablet Image')),
-                ('mobile', models.ImageField(upload_to=product.models.user_directory_path, verbose_name='Mobile Image')),
+                ('desktop',
+                 models.ImageField(upload_to=product.models.product_directory_path, verbose_name='Desktop Image')),
+                (
+                    'tablet',
+                    models.ImageField(upload_to=product.models.product_directory_path, verbose_name='Tablet Image')),
+                (
+                    'mobile',
+                    models.ImageField(upload_to=product.models.product_directory_path, verbose_name='Mobile Image')),
             ],
         ),
         migrations.AddField(
             model_name='product',
             name='image',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='images', to='product.image'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                    related_name='images', to='product.image'),
         ),
     ]
