@@ -2,8 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import slugify
 import uuid
-from images.models import ProductImage
-from images.models import product_directory_path
+from images.models import ProductImage, product_directory_path, CategoryImage
 
 
 class MiniProduct(models.Model):
@@ -38,6 +37,9 @@ class Category(models.Model):
         unique=True,
     )
     slug = models.SlugField(null=True, unique=True, editable=True)
+    image = models.OneToOneField(
+        CategoryImage, on_delete=models.SET_NULL, related_name="category_image", null=True, blank=True
+    )
 
     class Meta:
         verbose_name = _("Category")
