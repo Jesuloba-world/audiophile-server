@@ -117,7 +117,7 @@ class Included(models.Model):
         verbose_name_plural = _("Includes")
 
     def __str__(self):
-        return f"{self.quantity}x {self.item}"
+        return f"{self.quantity}x {self.item} | {self.product.short_name}"
 
 
 class Gallery(models.Model):
