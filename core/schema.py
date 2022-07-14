@@ -1,7 +1,8 @@
 import graphene
 from graphql_auth.schema import MeQuery
 from graphql_auth import mutations
-import graphql_jwt
+
+from product.schema import ProductQuery
 
 
 class AuthMutation(graphene.ObjectType):
@@ -26,12 +27,8 @@ class AuthMutation(graphene.ObjectType):
     refresh_token = mutations.RefreshToken.Field()
     revoke_token = mutations.RevokeToken.Field()
 
-    # logout
-    # delete_token_cookie = graphql_jwt.de()
-    # delete_refresh_token_cookie = graphql_jwt.DeleteRefreshTokenCookie.Field()
 
-
-class Query(MeQuery, graphene.ObjectType):
+class Query(MeQuery, ProductQuery, graphene.ObjectType):
     pass
 
 

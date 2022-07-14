@@ -40,10 +40,12 @@ class Category(models.Model):
     image = models.OneToOneField(
         CategoryImage, on_delete=models.SET_NULL, related_name="category_image", null=True, blank=True
     )
+    orderNumber = models.PositiveSmallIntegerField(null=True)
 
     class Meta:
         verbose_name = _("Category")
         verbose_name_plural = _("Categories")
+        ordering = ["orderNumber"]
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
