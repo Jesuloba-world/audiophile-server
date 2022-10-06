@@ -6,12 +6,12 @@ name = "pypi"
 [packages]
 django = "==3.2"
 graphene-django = "*"
-django-graphql-jwt = "*"
 django-graphql-auth = "*"
+django-graphql-jwt = "*"
 django-cors-headers = "*"
 django-dotenv = "*"
 pillow = "*"
-PyJWT = "==1.7.0"
+PyJWT = "==1.7.1"
 
 [dev-packages]
 black = "*"

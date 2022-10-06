@@ -14,7 +14,6 @@ class CategoryImageType(DjangoObjectType):
 
     class Meta:
         model = CategoryImage
-        exclude = ["orderNumber"]
 
 
 class ProductImageType(DjangoObjectType):
@@ -63,6 +62,7 @@ class ProductType(DjangoObjectType):
 class CategoryType(DjangoObjectType):
     class Meta:
         model = Category
+        exclude = ["orderNumber"]
 
 
 class ProductQuery(graphene.ObjectType):
