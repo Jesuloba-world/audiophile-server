@@ -137,9 +137,9 @@ AUTHENTICATION_BACKENDS = [
 GRAPHQL_JWT = {
     "JWT_EXPIRATION_DELTA": timedelta(minutes=5),
     "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=7),
-    "JWT_ALLOW_REFRESH": True,
     "JWT_VERIFY_EXPIRATION": True,
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+    "JWT_ALLOW_REFRESH": True,
     "JWT_REUSE_REFRESH_TOKENS": False,
     "JWT_COOKIE_NAME": "token",
     "JWT_REFRESH_TOKEN_COOKIE_NAME": "refresh",
@@ -160,10 +160,8 @@ GRAPHQL_JWT = {
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-]
+CORS_ALLOWED_ORIGINS = os.environ.get("ALLOWED_HOST").split(",")
+
 
 CORS_ALLOW_CREDENTIALS = True
 
