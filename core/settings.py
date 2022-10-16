@@ -143,7 +143,7 @@ GRAPHQL_JWT = {
     "JWT_REUSE_REFRESH_TOKENS": False,
     "JWT_COOKIE_NAME": "token",
     "JWT_REFRESH_TOKEN_COOKIE_NAME": "refresh",
-    "JWT_HIDE_TOKEN_FIELDS": True,
+    "JWT_ALLOW_ARGUMENT": True,
     "JWT_ALLOW_ANY_CLASSES": [
         "graphql_auth.mutations.Register",
         "graphql_auth.mutations.VerifyAccount",
@@ -160,8 +160,12 @@ GRAPHQL_JWT = {
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-CORS_ALLOWED_ORIGINS = os.environ.get("ALLOWED_HOST").split(",")
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
