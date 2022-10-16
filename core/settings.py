@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "product",
     "images",
+    "cart",
 ]
 
 MIDDLEWARE = [

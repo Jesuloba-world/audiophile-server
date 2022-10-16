@@ -1,3 +1,20 @@
 from django.db import models
+import uuid
+from product.models import Product
+from django.contrib.auth import get_user_model
 
-# Create your models here.
+User = get_user_model()
+
+
+class CartItem(models.Model):
+    id = models.UUIDField(
+        default=uuid.uuid4, unique=True, primary_key=True, editable=False
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+    )
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
