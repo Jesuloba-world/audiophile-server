@@ -3,6 +3,7 @@ from graphql_auth.schema import MeQuery
 from graphql_auth import mutations
 
 from product.schema import ProductQuery
+from cart.schema import CartMutations, CartQuery
 
 
 class AuthMutation(graphene.ObjectType):
@@ -28,11 +29,11 @@ class AuthMutation(graphene.ObjectType):
     revoke_token = mutations.RevokeToken.Field()
 
 
-class Query(MeQuery, ProductQuery, graphene.ObjectType):
+class Query(MeQuery, ProductQuery, CartQuery, graphene.ObjectType):
     pass
 
 
-class Mutation(AuthMutation, graphene.ObjectType):
+class Mutation(AuthMutation, CartMutations, graphene.ObjectType):
     pass
 
 
