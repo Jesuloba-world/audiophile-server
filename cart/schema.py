@@ -23,6 +23,14 @@ class CartQuery(graphene.ObjectType):
         description="return user cart items",
     )
 
+    def resolve_user_cart(self, info):
+        user = info.context.user
+
+        if user.is_anonymous:
+            raise UnauthorisedAccessError(message="You are not authenticated")
+        else:
+            return CartItem.objects.filter(owner=user)
+
 
 class AddCartMutation(graphene.Mutation):
     class Arguments:
