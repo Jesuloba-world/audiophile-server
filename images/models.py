@@ -34,9 +34,7 @@ class CategoryImage(models.Model):
         default=uuid.uuid4, unique=True, primary_key=True, editable=False
     )
     alt_text = models.CharField(max_length=100, null=True, blank=True)
-    image = models.ImageField(
-        upload_to=category_directory_path
-    )
+    image = models.ImageField(upload_to=category_directory_path)
 
     def __str__(self):
         return self.alt_text

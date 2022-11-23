@@ -17,7 +17,11 @@ class MiniProduct(models.Model):
     )
     slug = models.SlugField(null=True, unique=True, editable=True)
     image = models.OneToOneField(
-        ProductImage, on_delete=models.SET_NULL, related_name="mini_images", null=True, blank=True
+        ProductImage,
+        on_delete=models.SET_NULL,
+        related_name="mini_images",
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
@@ -38,7 +42,11 @@ class Category(models.Model):
     )
     slug = models.SlugField(null=True, unique=True, editable=True)
     image = models.OneToOneField(
-        CategoryImage, on_delete=models.SET_NULL, related_name="category_image", null=True, blank=True
+        CategoryImage,
+        on_delete=models.SET_NULL,
+        related_name="category_image",
+        null=True,
+        blank=True,
     )
     orderNumber = models.PositiveSmallIntegerField(null=True)
 
@@ -76,7 +84,11 @@ class Product(models.Model):
         related_name="products",
     )
     image = models.OneToOneField(
-        ProductImage, on_delete=models.SET_NULL, related_name="images", null=True, blank=True
+        ProductImage,
+        on_delete=models.SET_NULL,
+        related_name="images",
+        null=True,
+        blank=True,
     )
     slug = models.SlugField(null=True, unique=True, blank=True, editable=True)
     new = models.BooleanField(default=False)
@@ -130,13 +142,25 @@ class Gallery(models.Model):
         Product, on_delete=models.CASCADE, blank=False, null=False
     )
     first = models.OneToOneField(
-        ProductImage, on_delete=models.SET_NULL, null=True, blank=True, related_name="first"
+        ProductImage,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="first",
     )
     second = models.OneToOneField(
-        ProductImage, on_delete=models.SET_NULL, null=True, blank=True, related_name="second"
+        ProductImage,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="second",
     )
     third = models.OneToOneField(
-        ProductImage, on_delete=models.SET_NULL, null=True, blank=True, related_name="third"
+        ProductImage,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="third",
     )
 
     class Meta:
