@@ -13,6 +13,7 @@ django-dotenv = "*"
 pillow = "*"
 PyJWT = "==1.7.1"
 psycopg2-binary = "*"
+django-cloudinary-storage = "*"
 
 [dev-packages]
 black = "*"
