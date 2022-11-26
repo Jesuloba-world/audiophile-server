@@ -11,9 +11,6 @@ def category_directory_path(instance, filename):
 
 
 class ProductImage(models.Model):
-    id = models.UUIDField(
-        default=uuid.uuid4, unique=True, primary_key=True, editable=False
-    )
     alt_text = models.CharField(max_length=100, null=True, blank=True)
     desktop = models.ImageField(
         upload_to=product_directory_path, verbose_name="Desktop Image"
@@ -30,9 +27,6 @@ class ProductImage(models.Model):
 
 
 class CategoryImage(models.Model):
-    id = models.UUIDField(
-        default=uuid.uuid4, unique=True, primary_key=True, editable=False
-    )
     alt_text = models.CharField(max_length=100, null=True, blank=True)
     image = models.ImageField(upload_to=category_directory_path)
 

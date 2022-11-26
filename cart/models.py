@@ -7,9 +7,6 @@ User = get_user_model()
 
 
 class CartItem(models.Model):
-    id = models.UUIDField(
-        default=uuid.uuid4, unique=True, primary_key=True, editable=False
-    )
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,

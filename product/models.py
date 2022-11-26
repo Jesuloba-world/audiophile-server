@@ -6,9 +6,6 @@ from images.models import ProductImage, product_directory_path, CategoryImage
 
 
 class MiniProduct(models.Model):
-    id = models.UUIDField(
-        default=uuid.uuid4, unique=True, primary_key=True, editable=False
-    )
     name = models.CharField(
         max_length=255,
         blank=True,
@@ -29,9 +26,6 @@ class MiniProduct(models.Model):
 
 
 class Category(models.Model):
-    id = models.UUIDField(
-        default=uuid.uuid4, unique=True, primary_key=True, editable=False
-    )
     name = models.CharField(
         max_length=255,
         blank=True,
@@ -40,7 +34,7 @@ class Category(models.Model):
         help_text=_("Required and unique"),
         unique=True,
     )
-    slug = models.SlugField(null=True, unique=True, editable=True)
+    slug = models.SlugField(blank=True, unique=True, editable=False)
     image = models.OneToOneField(
         CategoryImage,
         on_delete=models.SET_NULL,
@@ -64,9 +58,6 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    id = models.UUIDField(
-        default=uuid.uuid4, unique=True, primary_key=True, editable=False
-    )
     name = models.CharField(
         max_length=255,
         blank=True,
@@ -122,9 +113,6 @@ class Included(models.Model):
         blank=True,
         related_name="includes",
     )
-    id = models.UUIDField(
-        default=uuid.uuid4, unique=True, primary_key=True, editable=False
-    )
 
     class Meta:
         verbose_name = _("Include")
@@ -135,9 +123,6 @@ class Included(models.Model):
 
 
 class Gallery(models.Model):
-    id = models.UUIDField(
-        default=uuid.uuid4, unique=True, primary_key=True, editable=False
-    )
     product = models.OneToOneField(
         Product, on_delete=models.CASCADE, blank=False, null=False
     )
