@@ -81,7 +81,7 @@ class Product(models.Model):
         null=True,
         blank=True,
     )
-    slug = models.SlugField(null=True, unique=True, blank=True, editable=True)
+    slug = models.SlugField(null=True, unique=True, blank=True, editable=False)
     new = models.BooleanField(default=False)
     price = models.DecimalField(null=True, blank=True, decimal_places=2, max_digits=8)
     description = models.TextField(
