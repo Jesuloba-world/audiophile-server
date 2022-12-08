@@ -125,6 +125,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "../audiophile-nginx/static")
+# to nginx folder expected folder
 
 MEDIA_URL = "/audiophile/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
