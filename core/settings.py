@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "cloudinary_storage",
     "django.contrib.staticfiles",
     "user",
     "graphene_django",
@@ -34,7 +35,6 @@ INSTALLED_APPS = [
     "product",
     "images",
     "cart",
-    "cloudinary_storage",
     "cloudinary",
 ]
 
@@ -124,9 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "../audiophile-nginx/static")
-# to nginx folder expected folder
+STATIC_URL = "/audiophile/static/"
 
 MEDIA_URL = "/audiophile/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -200,3 +198,4 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+STATICFILES_STORAGE = "cloudinary_storage.storage.StaticHashedCloudinaryStorage"
