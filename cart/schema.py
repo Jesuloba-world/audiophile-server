@@ -53,5 +53,43 @@ class AddCartMutation(graphene.Mutation):
             return AddCartMutation(cartItem=new_cart_item)
 
 
+class RemoveAllCartMutations(graphene.Mutation):
+    class Arguments:
+        pass
+
+    success = graphene.Field(graphene.Boolean)
+
+    @classmethod
+    def mutate(cls, root, info):
+        user = info.context.user
+
+        if user.is_anonymous:
+            raise UnauthorisedAccessError(message="You are not authenticated")
+        else:
+            all_cart_items = CartItem.objects.filter(owner=user)
+            all_cart_items.delete()
+            return RemoveAllCartMutations(success=True)
+
+
+class DeleteCartMutation(graphene.Mutation):
+    class Arguments:
+        id = graphene.String(required=True)
+
+    success = graphene.Field(graphene.Boolean)
+
+    @classmethod
+    def mutate(cls, root, info, id):
+        user = info.context.user
+
+        if user.is_anonymous:
+            raise UnauthorisedAccessError(message="You are not authenticated")
+        else:
+            cart_item = CartItem.objects.get(pk=id)
+            cart_item.delete()
+            return DeleteCartMutation(success=True)
+
+
 class CartMutations(graphene.ObjectType):
     add_to_cart = AddCartMutation.Field()
+    remove_all_cart = RemoveAllCartMutations.Field()
+    delete_from_cart = DeleteCartMutation.Field()
