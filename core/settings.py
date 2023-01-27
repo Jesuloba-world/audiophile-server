@@ -157,7 +157,7 @@ GRAPHQL_JWT = {
     "JWT_REUSE_REFRESH_TOKENS": False,
     "JWT_COOKIE_NAME": "token",
     "JWT_REFRESH_TOKEN_COOKIE_NAME": "refresh",
-    "JWT_ALLOW_ARGUMENT": True,
+    "JWT_AUTH_HEADER_NAME": "authorization",
     "JWT_ALLOW_ANY_CLASSES": [
         "graphql_auth.mutations.Register",
         "graphql_auth.mutations.VerifyAccount",
@@ -184,7 +184,7 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_METHODS = [
     "GET",
