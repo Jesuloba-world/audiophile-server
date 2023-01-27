@@ -149,15 +149,14 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 GRAPHQL_JWT = {
-    "JWT_EXPIRATION_DELTA": timedelta(minutes=5),
+    "JWT_EXPIRATION_DELTA": timedelta(hours=5),
     "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=7),
     "JWT_VERIFY_EXPIRATION": True,
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
     "JWT_ALLOW_REFRESH": True,
     "JWT_REUSE_REFRESH_TOKENS": False,
-    "JWT_COOKIE_NAME": "token",
-    "JWT_REFRESH_TOKEN_COOKIE_NAME": "refresh",
-    "JWT_AUTH_HEADER_NAME": "authorization",
+    # "JWT_AUTH_HEADER_NAME": "authorization",
+    # "JWT_AUTH_HEADER_PREFIX": "bearer",
     "JWT_ALLOW_ANY_CLASSES": [
         "graphql_auth.mutations.Register",
         "graphql_auth.mutations.VerifyAccount",
