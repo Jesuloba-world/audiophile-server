@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "product",
     "images",
     "cart",
+    "order",
     "cloudinary",
 ]
 
@@ -155,8 +156,6 @@ GRAPHQL_JWT = {
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
     "JWT_ALLOW_REFRESH": True,
     "JWT_REUSE_REFRESH_TOKENS": False,
-    # "JWT_AUTH_HEADER_NAME": "authorization",
-    # "JWT_AUTH_HEADER_PREFIX": "bearer",
     "JWT_ALLOW_ANY_CLASSES": [
         "graphql_auth.mutations.Register",
         "graphql_auth.mutations.VerifyAccount",

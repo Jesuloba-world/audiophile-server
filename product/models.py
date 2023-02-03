@@ -34,7 +34,7 @@ class Category(models.Model):
         help_text=_("Required and unique"),
         unique=True,
     )
-    slug = models.SlugField(blank=True, unique=True, editable=False)
+    slug = models.SlugField(blank=True, unique=True, editable=False, default="none")
     image = models.OneToOneField(
         CategoryImage,
         on_delete=models.SET_NULL,
