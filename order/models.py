@@ -16,7 +16,6 @@ class Order(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(choices=STATUSES, default="verifying", max_length=100)
     paymentMethod = models.CharField(blank=True, max_length=100)
-    price_paid = models.IntegerField(blank=True, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
