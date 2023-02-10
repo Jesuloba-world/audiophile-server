@@ -4,7 +4,7 @@ from graphql_auth import mutations
 
 from product.schema import ProductQuery
 from cart.schema import CartMutations, CartQuery
-from order.schema import OrderQuery
+from order.schema import OrderQuery, OrderMutations
 
 
 class AuthMutation(graphene.ObjectType):
@@ -34,7 +34,7 @@ class Query(MeQuery, ProductQuery, CartQuery, OrderQuery, graphene.ObjectType):
     pass
 
 
-class Mutation(AuthMutation, CartMutations, graphene.ObjectType):
+class Mutation(AuthMutation, CartMutations, OrderMutations, graphene.ObjectType):
     pass
 
 
