@@ -2,7 +2,6 @@ import graphene
 from graphene_django import DjangoObjectType
 from graphql import GraphQLError
 from .models import Order, OrderAddress, OrderProduct
-from product.models import Product
 from cart.models import CartItem
 
 
@@ -85,11 +84,15 @@ class NewOrderMutation(graphene.Mutation):
                 cartItems = CartItem.objects.filter(owner=user)
 
                 # use the gotten cartItems to create orderProducts and delete cartitem
-                for item in cartItems:
-                    OrderProduct.objects.create(
-                        product=item.product, order=order, quantity=item.quantity
-                    )
-                    item.delete()
+                OrderProduct.objects.bulk_create(
+                    [
+                        OrderProduct(
+                            product=item.product, order=order, quantity=item.quantity
+                        )
+                        for item in cartItems
+                    ]
+                )
+                cartItems.delete()
 
                 return cls(order=order, success=True)
             except Exception as e:
