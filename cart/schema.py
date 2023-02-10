@@ -33,6 +33,12 @@ class CartQuery(graphene.ObjectType):
 
 
 class AddCartMutation(graphene.Mutation):
+    """
+    This is field creates or updates a cart item, based on the quantity and product passed to it
+
+    Each user can only have unique products in their cart, 2 same products are not allowed. So when you pass same product with different quantity, the product already in the cart gets updated
+    """
+
     class Arguments:
         product_id = graphene.String(required=True)
         quantity = graphene.Int(required=True)

@@ -67,11 +67,17 @@ class CategoryType(DjangoObjectType):
 
 class ProductQuery(graphene.ObjectType):
     all_categories = graphene.List(CategoryType, description="Returns all categories")
-    category_by_slug = graphene.Field(CategoryType, slug=graphene.String(required=True),
-                                      description="Returns specific category")
+    category_by_slug = graphene.Field(
+        CategoryType,
+        slug=graphene.String(required=True),
+        description="Returns specific category",
+    )
     all_products = graphene.List(ProductType, description="Returns all Products")
-    product_by_slug = graphene.Field(ProductType, slug=graphene.String(required=True),
-                                     description="Get product by Slug")
+    product_by_slug = graphene.Field(
+        ProductType,
+        slug=graphene.String(required=True),
+        description="Get product by Slug",
+    )
 
     def resolve_all_categories(self, info: any) -> any:
         return Category.objects.all()

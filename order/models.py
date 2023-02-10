@@ -45,7 +45,7 @@ class OrderAddress(models.Model):
     name = models.CharField(blank=True, max_length=200)
     email_address = models.EmailField(blank=True, max_length=200)
     phone_number = models.CharField(blank=True, max_length=20)
-    address = models.TextField(blank=True)
+    address = models.CharField(blank=True, max_length=250)
     zipcode = models.CharField(blank=True, max_length=50)
     city = models.CharField(blank=True, max_length=200)
     country = models.CharField(blank=True, max_length=200)
