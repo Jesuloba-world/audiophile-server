@@ -55,12 +55,13 @@ class NewOrderMutation(graphene.Mutation):
     class Arguments:
         address = OrderAddressInput(required=True)
         paymentMethod = graphene.String(required=True)
+        total = graphene.Decimal(required=True)
 
     order = graphene.Field(OrderType)
     success = graphene.Field(graphene.Boolean)
 
     @classmethod
-    def mutate(cls, root, info, address, paymentMethod):
+    def mutate(cls, root, info, address, paymentMethod, total):
         user = info.context.user
 
         if user.is_anonymous:
@@ -68,7 +69,9 @@ class NewOrderMutation(graphene.Mutation):
         else:
             try:
                 # create order
-                order = Order.objects.create(owner=user, paymentMethod=paymentMethod)
+                order = Order.objects.create(
+                    owner=user, paymentMethod=paymentMethod, grand_total=total
+                )
                 # add the address
                 OrderAddress.objects.create(
                     name=address.name,
