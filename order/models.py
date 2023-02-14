@@ -18,7 +18,9 @@ class Order(models.Model):
     paymentMethod = models.CharField(blank=True, max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    grand_total = models.DecimalField(blank=True, decimal_places=2, max_digits=10)
+    grand_total = models.DecimalField(
+        blank=True, decimal_places=2, max_digits=10, default=0
+    )
 
     def __str__(self):
         return f"{self.id}-{self.owner.username}"
