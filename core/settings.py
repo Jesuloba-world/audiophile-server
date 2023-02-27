@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "images",
     "cart",
     "order",
+    "home",
     "cloudinary",
 ]
 
