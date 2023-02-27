@@ -14,7 +14,7 @@ class Hero(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk and Hero.objects.exists():
-            raise ValidationError("There is can be only one Hero instance")
+            raise ValidationError("There can only be one Hero instance")
         return super(Hero, self).save(*args, **kwargs)
 
     def __str__(self):
