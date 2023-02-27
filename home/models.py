@@ -19,3 +19,22 @@ class Hero(models.Model):
 
     def __str__(self):
         return "The hero section"
+
+
+class FeaturedProduct(models.Model):
+    TYPE = (
+        ("big", "Big"),
+        ("normal", "Normal"),
+        ("broken", "Broken"),
+    )
+
+    product = models.OneToOneField(
+        Product,
+        on_delete=models.CASCADE,
+    )
+    copy = models.TextField(null=True, blank=True)
+    image = models.OneToOneField(ProductImage, on_delete=models.CASCADE, null=True)
+    box_type = models.CharField(choices=TYPE, default="normal", max_length=100)
+
+    def __str__(self):
+        return f"featured-{self.product.short_name}"
