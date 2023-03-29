@@ -14,6 +14,7 @@ class CategoryImageType(DjangoObjectType):
 
     class Meta:
         model = CategoryImage
+        exclude = ("category_image",)
 
 
 class ProductImageType(DjangoObjectType):
