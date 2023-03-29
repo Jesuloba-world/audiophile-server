@@ -37,6 +37,7 @@ class ProductImageType(DjangoObjectType):
 
     class Meta:
         model = ProductImage
+        fields = ("desktop", "alt_text", "tablet", "mobile", "id")
 
 
 class GalleryType(DjangoObjectType):

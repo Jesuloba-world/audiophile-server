@@ -16,7 +16,6 @@ class MiniProduct(models.Model):
     image = models.OneToOneField(
         ProductImage,
         on_delete=models.SET_NULL,
-        related_name="mini_images",
         null=True,
         blank=True,
     )
@@ -77,7 +76,6 @@ class Product(models.Model):
     image = models.OneToOneField(
         ProductImage,
         on_delete=models.SET_NULL,
-        related_name="images",
         null=True,
         blank=True,
     )
